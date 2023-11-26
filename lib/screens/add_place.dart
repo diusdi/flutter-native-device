@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:native_device/providers/user_places.dart';
 import 'package:native_device/widgets/image_input.dart';
+import 'package:native_device/widgets/location_input.dart';
 
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
@@ -29,7 +30,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
       return;
     }
 
-    ref.read(userPlacesProvider.notifier).addPlace(enteredTitle, _selectedImage!);
+    ref
+        .read(userPlacesProvider.notifier)
+        .addPlace(enteredTitle, _selectedImage!);
     Navigator.of(context).pop();
   }
 
@@ -56,11 +59,14 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                 _selectedImage = image;
               },
             ),
+            const SizedBox(height:10),
+            LocationInput(),
             const SizedBox(height: 10),
             ElevatedButton.icon(
-                onPressed: _savePlace,
-                label: const Text('add'),
-                icon: const Icon(Icons.add))
+              onPressed: _savePlace,
+              label: const Text('add'),
+              icon: const Icon(Icons.add),
+            )
           ]),
         ),
       ),
